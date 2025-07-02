@@ -28,7 +28,8 @@ shape = SubResource("RectangleShape2D_uigpl")
 position = Vector2(561, 596)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Platform2"]
-modulate = Color(0.321998, 0.425292, 0.187113, 1)
+modulate = Color(0.307382, 0.38247, 0.549713, 1)
+position = Vector2(677, -121)
 mesh = SubResource("QuadMesh_xe4xi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
