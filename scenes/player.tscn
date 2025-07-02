@@ -20,4 +20,4 @@ position = Vector2(0, -64)
 shape = SubResource("RectangleShape2D_yeidl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -182)
+position = Vector2(0, -169)
