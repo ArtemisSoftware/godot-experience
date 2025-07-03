@@ -39,7 +39,8 @@ func _physics_process(delta: float) -> void:
 	#flip horizontal
 	
 	if horizontal_direction != 0:
-		sprite.flip_h = (horizontal_direction == -1)
+		switch_direction(horizontal_direction)
+		
 	
 	
 	move_and_slide()
@@ -48,6 +49,12 @@ func _physics_process(delta: float) -> void:
 	
 	pass
 	
+func switch_direction(horizontal_direction)	:
+	sprite.flip_h = (horizontal_direction == -1)
+	sprite.position.x = horizontal_direction * 4
+	pass
+	
+		
 func update_animation(horizontal_direction)	:
 	
 	if is_on_floor():
