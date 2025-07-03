@@ -11,10 +11,10 @@ size = Vector2(997, 49)
 [node name="KnightWorld" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_quamk")]
-position = Vector2(595, 374)
+position = Vector2(158, 98)
 
 [node name="Platform" type="StaticBody2D" parent="."]
-position = Vector2(561, 596)
+position = Vector2(224, 161)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Platform"]
 modulate = Color(0.321998, 0.425292, 0.187113, 1)
@@ -22,16 +22,4 @@ mesh = SubResource("QuadMesh_xe4xi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
 position = Vector2(-0.5, -0.5)
-shape = SubResource("RectangleShape2D_uigpl")
-
-[node name="Platform2" type="StaticBody2D" parent="."]
-position = Vector2(561, 596)
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform2"]
-modulate = Color(0.307382, 0.38247, 0.549713, 1)
-position = Vector2(677, -121)
-mesh = SubResource("QuadMesh_xe4xi")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
-position = Vector2(674, -119)
 shape = SubResource("RectangleShape2D_uigpl")
