@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c68cmqpoee82w" path="res://assets/player/_Fall.png" id="5_qfht3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yeidl"]
-size = Vector2(66, 126)
+size = Vector2(21, 39)
 
 [sub_resource type="Animation" id="Animation_4ejc5"]
 resource_name = "idle"
@@ -293,12 +293,12 @@ texture = ExtResource("2_el81f")
 hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -64)
+position = Vector2(-1.5, -19.5)
 shape = SubResource("RectangleShape2D_yeidl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -51)
+position = Vector2(0, -23)
+zoom = Vector2(0.65, 0.65)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
