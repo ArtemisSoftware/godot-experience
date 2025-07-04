@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ch7a15koyiynm"]
+[gd_scene load_steps=7 format=3 uid="uid://ch7a15koyiynm"]
 
 [ext_resource type="PackedScene" uid="uid://by0xrigxrt8w" path="res://scenes/player.tscn" id="1_quamk"]
+[ext_resource type="PackedScene" uid="uid://fo0ys3iuy0pv" path="res://scenes/box.tscn" id="2_mffic"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_n38sv"]
 size = Vector2(300, 25)
@@ -40,3 +41,6 @@ mesh = SubResource("QuadMesh_nltum")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_jdvfp")
+
+[node name="Box" parent="." instance=ExtResource("2_mffic")]
+position = Vector2(77, 61)
