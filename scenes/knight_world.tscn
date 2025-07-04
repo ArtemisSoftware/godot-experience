@@ -43,4 +43,4 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_jdvfp")
 
 [node name="Box" parent="." instance=ExtResource("2_mffic")]
-position = Vector2(77, 61)
+position = Vector2(79, 52)

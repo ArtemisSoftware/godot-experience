@@ -8,6 +8,8 @@ extends CharacterBody2D
 @onready var animationPlayer = $AnimationPlayer
 @onready var sprite = $Sprite2D
 
+var is_crouching = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -41,7 +43,10 @@ func _physics_process(delta: float) -> void:
 	if horizontal_direction != 0:
 		switch_direction(horizontal_direction)
 		
-	
+	if Input.is_action_just_pressed("crouch"):
+		crouch()
+	elif Input.is_action_just_released("crouch"):
+		stand()
 	
 	move_and_slide()
 	
@@ -58,8 +63,12 @@ func switch_direction(horizontal_direction)	:
 func update_animation(horizontal_direction)	:
 	
 	if is_on_floor():
-		if horizontal_direction == 0:
-			animationPlayer.play("idle")
+		if horizontal_direction == 0 && is_crouching:
+			animationPlayer.play("crouch")
+		elif horizontal_direction == 0: 
+			animationPlayer.play("idle")	
+		elif horizontal_direction != 0 && is_crouching:	
+			animationPlayer.play("crouch_walk")
 		else:
 			animationPlayer.play("run")
 	else:
@@ -69,3 +78,11 @@ func update_animation(horizontal_direction)	:
 			animationPlayer.play("fall")	
 		
 	pass
+	
+func crouch():
+	if is_crouching:
+		return
+	is_crouching = true	
+	
+func stand():
+	is_crouching = false		
