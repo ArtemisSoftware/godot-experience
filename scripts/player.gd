@@ -7,8 +7,12 @@ extends CharacterBody2D
 
 @onready var animationPlayer = $AnimationPlayer
 @onready var sprite = $Sprite2D
+@onready var cshape = $CollisionShape2D
 
 var is_crouching = false
+
+var standing_cshape = preload("res://assets/player/collisions/knight_standing_cshape.tres")
+var crouching_cshape = preload("res://assets/player/collisions/knight_crouching_cshape.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -83,6 +87,10 @@ func crouch():
 	if is_crouching:
 		return
 	is_crouching = true	
+	cshape.shape = crouching_cshape
+	cshape.position.y = -12
 	
 func stand():
-	is_crouching = false		
+	is_crouching = false	
+	cshape.shape = standing_cshape
+	cshape.position.y = -17

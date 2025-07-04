@@ -3,13 +3,11 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1xtux"]
 [ext_resource type="Texture2D" uid="uid://d178tk3xicxlw" path="res://assets/player/_Idle.png" id="2_el81f"]
 [ext_resource type="Texture2D" uid="uid://dl80jj7v1c1fx" path="res://assets/player/_Run.png" id="3_1s1q2"]
+[ext_resource type="Shape2D" uid="uid://cav8m6v36toei" path="res://assets/player/collisions/knight_standing_cshape.tres" id="3_vlpe5"]
 [ext_resource type="Texture2D" uid="uid://xgt622ircsay" path="res://assets/player/_Jump.png" id="4_imrqn"]
 [ext_resource type="Texture2D" uid="uid://c68cmqpoee82w" path="res://assets/player/_Fall.png" id="5_qfht3"]
 [ext_resource type="Texture2D" uid="uid://dnig21dqkvcev" path="res://assets/player/_Crouch.png" id="6_h18qo"]
 [ext_resource type="Texture2D" uid="uid://je5kl14rk4c5" path="res://assets/player/_CrouchWalk.png" id="7_rlq86"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yeidl"]
-size = Vector2(21, 39)
 
 [sub_resource type="Animation" id="Animation_5dqs1"]
 length = 0.001
@@ -404,8 +402,8 @@ texture = ExtResource("2_el81f")
 hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, -19.5)
-shape = SubResource("RectangleShape2D_yeidl")
+position = Vector2(0, -17)
+shape = ExtResource("3_vlpe5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -23)
