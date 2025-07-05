@@ -414,3 +414,11 @@ libraries = {
 "": SubResource("AnimationLibrary_5i0wc")
 }
 autoplay = "idle"
+
+[node name="CrouchRaycast_1" type="RayCast2D" parent="."]
+position = Vector2(-8, -17)
+target_position = Vector2(0, -19)
+
+[node name="CrouchRaycast_2" type="RayCast2D" parent="."]
+position = Vector2(8, -17)
+target_position = Vector2(0, -19)
