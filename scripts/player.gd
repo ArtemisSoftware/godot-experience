@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@export var speed = 100
+@export var speed = 70#100
 @export var gravity = 45
 @export var jump_force = 300
 
@@ -10,10 +10,12 @@ extends CharacterBody2D
 @onready var cshape = $CollisionShape2D
 @onready var crouch_raycast_1: RayCast2D = $CrouchRaycast_1
 @onready var crouch_raycast_2: RayCast2D = $CrouchRaycast_2
+@onready var coyote_timer: Timer = $CoyoteTimer
 
 
 var is_crouching = false
 var stuck_under_object = false
+var can_cayote_jump = false
 
 var standing_cshape = preload("res://assets/player/collisions/knight_standing_cshape.tres")
 var crouching_cshape = preload("res://assets/player/collisions/knight_crouching_cshape.tres")
@@ -29,13 +31,17 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	if !is_on_floor():
+	if !is_on_floor() && (can_cayote_jump == false):
 		velocity.y += gravity
 		if velocity.y > 600:
 			velocity.y = 600
 			
-	if Input.is_action_just_pressed("jump"): #&& is_on_floor(): #disables multiple jumps on the air
-		velocity.y = -jump_force		
+	if Input.is_action_just_pressed("jump"):
+		if  is_on_floor() || can_cayote_jump:
+			velocity.y = -jump_force
+			if can_cayote_jump:
+				print("Cayote time")
+				can_cayote_jump = false		
 	
 	
 	#horizontal movement
@@ -65,11 +71,24 @@ func _physics_process(delta: float) -> void:
 		stand()
 		stuck_under_object = false
 	
+	
+	var was_on_floor = is_on_floor()
 	move_and_slide()
+	
+	if was_on_floor && !is_on_floor() && velocity.y >= 0:
+		can_cayote_jump = true
+		coyote_timer.start()
+	
 	
 	update_animation(horizontal_direction)
 	
 	pass
+	
+
+func _on_coyote_timer_timeout() -> void:
+	can_cayote_jump = false
+	pass # Replace with function body.	
+	
 	
 func switch_direction(horizontal_direction)	:
 	sprite.flip_h = (horizontal_direction == -1)

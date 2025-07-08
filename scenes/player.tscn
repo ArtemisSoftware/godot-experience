@@ -402,7 +402,7 @@ texture = ExtResource("2_el81f")
 hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -17)
+position = Vector2(0.5, -17)
 shape = ExtResource("3_vlpe5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -422,3 +422,9 @@ target_position = Vector2(0, -19)
 [node name="CrouchRaycast_2" type="RayCast2D" parent="."]
 position = Vector2(8, -17)
 target_position = Vector2(0, -19)
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
