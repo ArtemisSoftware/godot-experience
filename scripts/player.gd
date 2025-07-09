@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var crouch_raycast_2: RayCast2D = $CrouchRaycast_2
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
+@onready var jump_height_timer: Timer = $JumpHeightTimer
 
 
 var is_crouching = false
@@ -39,6 +40,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = 600
 			
 	if Input.is_action_just_pressed("jump"):
+		jump_height_timer.start()
 		jump()
 	
 	#horizontal movement
@@ -97,6 +99,20 @@ func _on_coyote_timer_timeout() -> void:
 func _on_jump_buffer_timer_timeout() -> void:
 	jump_buffered = false
 	pass # Replace with function body.	
+	
+
+func _on_jump_height_timer_timeout() -> void:
+	if ! Input.is_action_pressed("jump"):
+		if velocity.y < -100:
+			velocity.y = -100
+			print("Low jump")
+	else:
+		print("High jump")
+		pass	
+	
+	
+	pass # Replace with function body.
+	
 	
 func switch_direction(horizontal_direction)	:
 	sprite.flip_h = (horizontal_direction == -1)
