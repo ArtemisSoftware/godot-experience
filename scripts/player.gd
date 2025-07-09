@@ -11,11 +11,13 @@ extends CharacterBody2D
 @onready var crouch_raycast_1: RayCast2D = $CrouchRaycast_1
 @onready var crouch_raycast_2: RayCast2D = $CrouchRaycast_2
 @onready var coyote_timer: Timer = $CoyoteTimer
+@onready var jump_buffer_timer: Timer = $JumpBufferTimer
 
 
 var is_crouching = false
 var stuck_under_object = false
 var can_cayote_jump = false
+var jump_buffered = false
 
 var standing_cshape = preload("res://assets/player/collisions/knight_standing_cshape.tres")
 var crouching_cshape = preload("res://assets/player/collisions/knight_crouching_cshape.tres")
@@ -37,12 +39,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = 600
 			
 	if Input.is_action_just_pressed("jump"):
-		if  is_on_floor() || can_cayote_jump:
-			velocity.y = -jump_force
-			if can_cayote_jump:
-				print("Cayote time")
-				can_cayote_jump = false		
-	
+		jump()
 	
 	#horizontal movement
 	
@@ -75,11 +72,18 @@ func _physics_process(delta: float) -> void:
 	var was_on_floor = is_on_floor()
 	move_and_slide()
 	
+	# Started to fall
+	
 	if was_on_floor && !is_on_floor() && velocity.y >= 0:
 		can_cayote_jump = true
 		coyote_timer.start()
 	
-	
+	# Touched ground
+	if !was_on_floor && is_on_floor():
+		if jump_buffered:
+			jump_buffered = false
+			jump()
+		
 	update_animation(horizontal_direction)
 	
 	pass
@@ -90,11 +94,25 @@ func _on_coyote_timer_timeout() -> void:
 	pass # Replace with function body.	
 	
 	
+func _on_jump_buffer_timer_timeout() -> void:
+	jump_buffered = false
+	pass # Replace with function body.	
+	
 func switch_direction(horizontal_direction)	:
 	sprite.flip_h = (horizontal_direction == -1)
 	sprite.position.x = horizontal_direction * 4
 	pass
 	
+func jump() -> void:
+	if is_on_floor() || can_cayote_jump:
+		velocity.y = -jump_force
+		if can_cayote_jump:
+			print("Cayote time")
+			can_cayote_jump = false		
+	else:
+		if !jump_buffered:
+			jump_buffered = true
+			jump_buffer_timer.start()	
 		
 func update_animation(horizontal_direction)	:
 	
